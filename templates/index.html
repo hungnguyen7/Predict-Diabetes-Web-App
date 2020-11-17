@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Design for Data Mining</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <div class="login">
+        <h1>Early stage diabetes risk prediction</h1>
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action={{url_for('predict')}} method="POST">
+            <div class="container">
+                <div class="item1">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>Age:</th>
+                            <td><input type="number" name="age" placeholder="Age" required="required"></td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>
+                                <select name="gender" id="">
+                                    <option value="1">Male</option>
+                                    <option value="0">Female</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Polyuria</th>
+                            <td>
+                                <select name="polyuria" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Polydipsia</th>
+                            <td>
+                                <select name="polydipsia" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Sudden weight loss</th>
+                            <td>
+                                <select name="suddenWeightLoss" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Weakness</th>
+                            <td>
+                                <select name="weakness" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Polyphagia</th>
+                            <td>
+                                <select name="polyphagia" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Genital thrush</th>
+                            <td>
+                                <select name="genitalThrush" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+                <div class="item2">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>Visual Blurring</th>
+                            <td>
+                                <select name="visualBlurring" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Itching</th>
+                            <td>
+                                <select name="itching" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Irritability</th>
+                            <td>
+                                <select name="irritability" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Delayed healing</th>
+                            <td>
+                                <select name="delayedHealing" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Partial paresis</th>
+                            <td>
+                                <select name="partialParesis" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Muscle stiffness</th>
+                            <td>
+                                <select name="muscleStiffness" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Alopecia</th>
+                            <td>
+                                <select name="alopecia" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Obesity</th>
+                            <td>
+                                <select name="obesity" id="">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+            <button type="submit" class="myButton">Predict</button>
+        </form>
+
+        <br>
+        <br>
+        {{ prediction_text }}
+    </div>
+</body>
+
+</html>
