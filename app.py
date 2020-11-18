@@ -58,9 +58,9 @@ def predictCSV():
 
     # print(stream)
 
-    # Xuat file output.csv
-    pd.DataFrame(output).to_csv('./output.csv', index=False, index_label=False)
-    f=open('./output.csv', 'r')
+    # Xuat file result.csv
+    pd.DataFrame(output).to_csv('./result.csv', index=False, index_label=False)
+    f=open('./result.csv', 'r')
     response=make_response(f.read())
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
     return response
