@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Design for Data Mining</title>
+    <title>Diabetes Risk Predict</title>
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
@@ -14,7 +14,7 @@
 
 <body>
     <div class="login">
-        <button><a href="/uploadcsv">Predict By CSV</a></button>
+        <input id="btn" type="button" onclick="location.href='/uploadcsv'" value="Predict by CSV"/>
         <h1>Early stage diabetes risk prediction</h1>
         <!-- Main Input For Receiving Query to our ML -->
         <form action={{url_for('predict')}} method="POST">
