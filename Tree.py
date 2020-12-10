@@ -32,3 +32,10 @@ accuracy_score(y_test, y_pred))
 # Hiển thị cây
 tree.plot_tree(model.fit(X, y))
 plt.show()
+=======
+plt.show()
+import graphviz
+dot_data=tree.export_graphviz(model,feature_names=None,class_names=None,filled=True,rounded=True,special_characters=True)
+
+graph =graphviz.Source(dot_data)
+graph
