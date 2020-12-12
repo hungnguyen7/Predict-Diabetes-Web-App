@@ -4,10 +4,14 @@ from flask_restful import Api, Resource, reqparse
 import pickle
 import pandas as pd
 app=Flask(__name__)
+
+# Load model
 model=pickle.load(open('model.pkl', 'rb'))
 @app.route('/')
 def home():
     return render_template('index.html')
+
+#Xu li form
 @app.route('/predict', methods=['POST'])
 def predict():
     # retriving values from form
@@ -19,10 +23,13 @@ def predict():
 
 import io
 import csv
+
+# Xu li upload csv
 @app.route('/uploadcsv')
 def uploadCSV():
     return render_template('uploadCSV.html')
 
+# Chuyen doi du lieu sang 0 va 1
 def tranformData(arrayToTransform):
     "Chuyen doi du lieu tu Yes, No sang 0, 1"
     for i in range(len(arrayToTransform)):
@@ -55,9 +62,7 @@ def predictCSV():
             prediction=model.predict([np.array(row)])
             row.append(list(prediction))
             output.append(row)
-    # print(output)
 
-    # print(stream)
 
     # Xuat file result.csv
     pd.DataFrame(output).to_csv('./result.csv', index=False, index_label=False)
@@ -66,6 +71,7 @@ def predictCSV():
     response.headers["Content-Disposition"] = "attachment; filename=result.csv"
     return response
 
+# Xu li api
 API=Api(app)
 @app.route('/api/predict', methods=['POST'])
 def apiPredict():

@@ -22,9 +22,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
 import pickle
-data=pd.read_csv("/content/drive/My Drive/Colab Notebooks/diabetes_data_upload.csv")
+data=pd.read_csv("./diabetes_data_upload.csv")
 #kiem tra null => Data không null!!
-# print(data.isna().sum())
+# print(data.isnan().sum())
+
 # Chia tap du lieu thanh 3 phan: train, validation va test
 train_validation, test=train_test_split(data, test_size=0.2, stratify=data['class'], random_state=17)
 train, validation=train_test_split(train_validation, test_size=0.2, stratify=train_validation['class'], random_state=17)
@@ -35,26 +36,17 @@ data=data.replace('No', 0)
 target='class'
 y=data[target]
 X=data.drop(columns=['class'])
+
 # Ti le giua Positive va Negative
 print(y.value_counts(normalize=True))
-#------
+
+#Tao model voi KNN
 from sklearn.neighbors import KNeighborsClassifier
 model=KNeighborsClassifier(n_neighbors=5)
 nFold=10
 scores=cross_val_score(model, X, y, cv=nFold)
 print("Do chinh xac cua mo hinh su dung K-Neighbors voi nghi thuc kiem tra %d-fold %.3f" %(nFold, np.mean(scores)))
-#------
-# import category_encoders as ce
-# # !pip install category_encoders
-# from sklearn.pipeline import make_pipeline
-# from sklearn.impute import SimpleImputer
-# from sklearn.linear_model import LogisticRegression
-# # from sklearn.metrics import roc_auc_score
-# pipepline=make_pipeline(ce.OrdinalEncoder(), SimpleImputer(strategy='median'), LogisticRegression(random_state=100, max_iter=1000))
-# model1=pipepline.fit(X,y)
-# scores=cross_val_score(model1, X, y, cv=nFold)
-# print("kiem tra %d-fold %.3f" %(nFold, np.mean(scores)))
-#------
+#Tao model voi Decision Tree
 from sklearn.tree import DecisionTreeClassifier
 decisionTreeModel=[]
 criterion=['gini', 'entropy']
@@ -64,6 +56,8 @@ for i in criterion:
   decisionTreeModel.append(model2)
   scores = cross_val_score(model2, X, y, cv=nFold)
   print("Do chinh xac cua mo hinh su dung Decision Tree tham so %s voi nghi thuc kiem tra %d-fold %.3f" %(i, nFold, np.mean(scores)))
+
+#Lay model decision Tree voi ket qua tot nhat
 pickle.dump(decisionTreeModel[0], open('model.pkl', 'wb'))
 
 
@@ -76,10 +70,12 @@ model= model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 print("Do chinh xac cua mo hinh voi nghi thuc kiem tra hold-out: %.3f" %
 accuracy_score(y_test, y_pred))
+
 # Hiển thị cây
 tree.plot_tree(model.fit(X, y))
 plt.show()
 #Dùng graphviz để hiện thị to hơn các luật của cây.
+
 import graphviz
 dot_data=tree.export_graphviz(model, out_file=None,feature_names=None, class_names=y_pred, label='all',filled=False, leaves_parallel=False, impurity=True,node_ids=False, proportion=False, rotate=False,rounded=False, special_characters=False, precision=3)
 graph =graphviz.Source(dot_data)
