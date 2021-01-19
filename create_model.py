@@ -26,9 +26,6 @@ data=pd.read_csv("./diabetes_data_upload.csv")
 #kiem tra null => Data không null!!
 # print(data.isnan().sum())
 
-# Chia tap du lieu thanh 3 phan: train, validation va test
-train_validation, test=train_test_split(data, test_size=0.2, stratify=data['class'], random_state=17)
-train, validation=train_test_split(train_validation, test_size=0.2, stratify=train_validation['class'], random_state=17)
 data=data.replace('Male', 1)
 data=data.replace('Female', 0)
 data=data.replace('Yes', 1)
